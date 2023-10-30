@@ -24,12 +24,16 @@ Vue.use(Vant);
 Vue.use(VueDOMPurifyHTML);
 
 const originPush = VueRouter.prototype.push;
-const push = (location) => originPush.call(this, location).catch((err) => err);
-VueRouter.prototype.push = push;
+// eslint-disable-next-line func-names
+VueRouter.prototype.push = function push(location) {
+  return originPush.call(this, location).catch((err) => err);
+};
 
 const originReplace = VueRouter.prototype.replace;
-const replace = (location) => originReplace.call(this, location).catch((err) => err);
-VueRouter.prototype.replace = replace;
+// eslint-disable-next-line func-names
+VueRouter.prototype.replace = function replace(location) {
+  return originReplace.call(this, location).catch((err) => err);
+};
 
 // eslint-disable-next-line no-new
 new Vue({ el: '#app', router, store, render: (h) => h(App) });
